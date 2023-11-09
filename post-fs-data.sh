@@ -3,6 +3,10 @@
 # This will make your scripts compatible even if Magisk change its mount point in the future
 MODDIR=${0%/*}
 
+if [ "$(magisk -V)" -lt 20400 ]; then
+  touch "$MODDIR/disable"
+fi
+
 mkdir -p $MODDIR/system/etc/security/cacerts
 rm $MODDIR/system/etc/security/cacerts/*
 cp -f /data/misc/user/0/cacerts-added/* $MODDIR/system/etc/security/cacerts/
